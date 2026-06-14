@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { locales, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import "../globals.css";
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Audience Suite",
