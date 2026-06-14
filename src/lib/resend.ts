@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function sendFanWelcomeEmail({
   fanEmail,
   fanName,
@@ -18,6 +16,7 @@ export async function sendFanWelcomeEmail({
   const greeting = fanName ? `Hey ${fanName}` : "Hey";
   const color = primaryColor || "#0d9488";
 
+  const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL ?? "noreply@audiencesuite.com",
     to: fanEmail,
