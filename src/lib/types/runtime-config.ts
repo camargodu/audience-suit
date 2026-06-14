@@ -61,7 +61,7 @@ export interface RuntimeConfigSuspended {
   tenantId: string;
   appStatus: "suspended";
   billingStatus: BillingStatus;
-  publicMessage: string;
+  publicMessage?: string;
   showOfficialLinks: boolean;
   socialLinks: SocialLink[];
 }
