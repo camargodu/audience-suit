@@ -40,7 +40,7 @@ export default async function PwaPage({
 
   if (!config) notFound();
 
-  if (config.appStatus === "suspended" || config.appStatus === "archived") {
+  if (config.appStatus === "suspended") {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
         <p className="text-lg font-medium text-slate-700">
