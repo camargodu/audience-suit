@@ -8,7 +8,7 @@ import type { BillingStatus, AppStatus } from "@/lib/types/runtime-config";
 export default async function DashboardPage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Dashboard" });

@@ -32,7 +32,7 @@ const PLATFORM_LABELS: Record<string, string> = {
 export default async function PwaPage({
   params,
 }: {
-  params: Promise<{ locale: Locale; slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "Fan" });

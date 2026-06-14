@@ -11,9 +11,10 @@ export default async function DashboardLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await params;
+  const { locale: localeStr } = await params;
+  const locale = localeStr as Locale;
   const [t, supabaseResult] = await Promise.all([
     getTranslations({ locale, namespace: "Dashboard" }),
     Promise.resolve(createServerClient()),

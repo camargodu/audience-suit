@@ -7,7 +7,7 @@ import FansTable, { type FanRow } from "./FansTable";
 export default async function FansPage({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const [t, tDash] = await Promise.all([
