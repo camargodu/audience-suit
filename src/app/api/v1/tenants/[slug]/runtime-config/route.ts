@@ -16,22 +16,23 @@ import type {
  */
 export async function GET(
   _request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
+  const { slug } = await params;
   const supabase = createServiceRoleClient();
 
   // 1. Localiza o tenant pelo slug
   const { data: tenant, error: tenantError } = await supabase
     .from("tenants")
     .select("id, slug, plan")
-    .eq("slug", params.slug)
+    .eq("slug", slug)
     .maybeSingle();
 
   if (tenantError) {
     // Mesmo em erro de infraestrutura, nunca expor stack trace ao app.
     return NextResponse.json(
       {
-        tenantId: params.slug,
+        tenantId: slug,
         appStatus: "suspended",
         billingStatus: "suspended",
         publicMessage: "Este app está temporariamente indisponível.",
