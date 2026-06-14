@@ -12,7 +12,7 @@ export default async function OnboardingPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Onboarding" });
 
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {

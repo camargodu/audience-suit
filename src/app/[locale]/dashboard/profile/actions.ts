@@ -9,7 +9,7 @@ export async function updateProfile(
   _prev: ProfileState,
   formData: FormData
 ): Promise<ProfileState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Not authenticated." };
 

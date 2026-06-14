@@ -9,7 +9,7 @@ export async function addLink(
   _prev: LinkState,
   formData: FormData
 ): Promise<LinkState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Not authenticated." };
 
@@ -51,13 +51,13 @@ export async function addLink(
 }
 
 export async function toggleLink(id: string, isActive: boolean, locale: string): Promise<void> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   await supabase.from("social_links").update({ is_active: isActive }).eq("id", id);
   revalidatePath(`/${locale}/dashboard/links`);
 }
 
 export async function deleteLink(id: string, locale: string): Promise<void> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   await supabase.from("social_links").delete().eq("id", id);
   revalidatePath(`/${locale}/dashboard/links`);
 }
@@ -66,7 +66,7 @@ export async function reorderLinks(
   ids: string[],
   locale: string
 ): Promise<void> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   await Promise.all(
     ids.map((id, index) =>
       supabase.from("social_links").update({ sort_order: index + 1 }).eq("id", id)

@@ -7,7 +7,7 @@ import { createServiceRoleClient } from "@/lib/supabase/server";
 export type ActionResult = { error: string } | null;
 
 export async function saveProfileStep(formData: FormData): Promise<ActionResult> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Not authenticated." };
 
@@ -25,7 +25,7 @@ export async function saveProfileStep(formData: FormData): Promise<ActionResult>
 }
 
 export async function saveBrandingStep(formData: FormData): Promise<ActionResult> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Not authenticated." };
 
@@ -44,7 +44,7 @@ export async function saveBrandingStep(formData: FormData): Promise<ActionResult
 }
 
 export async function saveSocialLinkStep(formData: FormData): Promise<ActionResult> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Not authenticated." };
 
@@ -75,7 +75,7 @@ export async function finishOnboarding(locale: string): Promise<void> {
 }
 
 async function getTenantId(
-  supabase: ReturnType<typeof createServerClient>,
+  supabase: Awaited<ReturnType<typeof createServerClient>>,
   userId: string
 ): Promise<string> {
   const { data } = await supabase

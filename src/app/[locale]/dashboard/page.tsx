@@ -12,7 +12,7 @@ export default async function DashboardPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Dashboard" });
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/auth/login`);

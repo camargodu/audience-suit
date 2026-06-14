@@ -54,7 +54,7 @@ export async function signUp(
   }
 
   // ── 1. Create auth user ───────────────────────────────────────────────────
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
 
   const { data, error: authError } = await supabase.auth.signUp({
     email,

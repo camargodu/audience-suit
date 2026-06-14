@@ -6,7 +6,7 @@ import { sendPushToTenant } from "@/lib/onesignal";
 export type PushState = { error: string } | { success: true; recipients: number } | null;
 
 export async function sendPush(_prev: PushState, formData: FormData): Promise<PushState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Unauthorized." };
 

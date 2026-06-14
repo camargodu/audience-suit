@@ -14,7 +14,7 @@ export default async function ProfilePage({
   const t = await getTranslations({ locale, namespace: "Profile" });
   const tDash = await getTranslations({ locale, namespace: "Dashboard" });
 
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/auth/login`);
 

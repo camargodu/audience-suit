@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { createServerClient } from "@/lib/supabase/ssr";
 
 async function getTenantId() {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
   const { data } = await supabase
@@ -18,7 +18,7 @@ async function getTenantId() {
 export type EventState = { error: string } | { success: true } | null;
 
 export async function createEvent(_prev: EventState, formData: FormData): Promise<EventState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const tenantId = await getTenantId();
   if (!tenantId) return { error: "Unauthorized." };
 
@@ -45,7 +45,7 @@ export async function createEvent(_prev: EventState, formData: FormData): Promis
 }
 
 export async function updateEvent(_prev: EventState, formData: FormData): Promise<EventState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const tenantId = await getTenantId();
   if (!tenantId) return { error: "Unauthorized." };
 
@@ -78,7 +78,7 @@ export async function updateEvent(_prev: EventState, formData: FormData): Promis
 }
 
 export async function deleteEvent(id: string): Promise<EventState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const tenantId = await getTenantId();
   if (!tenantId) return { error: "Unauthorized." };
 
@@ -94,7 +94,7 @@ export async function deleteEvent(id: string): Promise<EventState> {
 }
 
 export async function togglePublished(id: string, current: boolean): Promise<EventState> {
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const tenantId = await getTenantId();
   if (!tenantId) return { error: "Unauthorized." };
 

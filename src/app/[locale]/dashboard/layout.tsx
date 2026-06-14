@@ -15,11 +15,10 @@ export default async function DashboardLayout({
 }) {
   const { locale: localeStr } = await params;
   const locale = localeStr as Locale;
-  const [t, supabaseResult] = await Promise.all([
+  const [t, supabase] = await Promise.all([
     getTranslations({ locale, namespace: "Dashboard" }),
-    Promise.resolve(createServerClient()),
+    createServerClient(),
   ]);
-  const supabase = supabaseResult;
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) redirect(`/${locale}/auth/login`);

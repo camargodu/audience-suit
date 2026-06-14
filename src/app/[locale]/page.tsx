@@ -106,7 +106,7 @@ export default async function LandingPage({
           <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
             <img src="/brand/logo-light.svg" alt="Audience Suite" className="h-8 w-auto" />
             <nav className="flex items-center gap-3">
-              <LocaleSwitcher currentLocale={locale} />
+              <LocaleSwitcher currentLocale={locale as Locale} />
               <Link
                 href={`/${locale}/auth/login`}
                 className="text-sm font-medium text-slate-600 hover:text-slate-900"

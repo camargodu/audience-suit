@@ -15,7 +15,7 @@ export default async function FansPage({
     getTranslations({ locale, namespace: "Dashboard" }),
   ]);
 
-  const supabase = createServerClient();
+  const supabase = await createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/${locale}/auth/login`);
 
